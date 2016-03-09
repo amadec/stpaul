@@ -5,6 +5,10 @@ namespace stpaul\DAO;
 use Doctrine\DBAL\Connection;
 use stpaul\Domain\Sejour;
 
+/**
+ * Class SejourDAO
+ * @package stpaul\DAO
+ */
 class SejourDAO {
     /**
      * Database connection
@@ -34,7 +38,7 @@ class SejourDAO {
         // Convert query result to an array of domain objects
         $sejours = array();
         foreach ($result as $row) {
-            $sejourId = $row['sejno'];
+            $sejourId = $row['SEJNO'];
             $sejours[$sejourId] = $this->buildsejour($row);
         }
         return $sejours;
@@ -47,12 +51,12 @@ class SejourDAO {
      * @return \stpaul\Domain\Sejour
      */
     private function buildsejour(array $row) {
-        $sejour = new sejours();
-        $sejour->setId($row['sejno']);
-        $sejour->setIntitule($row['sejintitule']);
-        $sejour->setMontant($row['sejmontantmbi']);
-        $sejour->setDtedeb($row['sejdtedeb']);
-        $sejour->setDuree($row['sejduree']);
+        $sejour = new Sejour($row['SEJNO'],$row['SEJINTITULE'],$row['SEJMONTANTMBI'],$row['SEJDTEDEB'],$row['SEJDUREE']);
+        $sejour->setNoSejour($row['SEJNO']);
+        $sejour->setIntitule($row['SEJINTITULE']);
+        $sejour->setMontant($row['SEJMONTANTMBI']);
+        $sejour->setDtedeb($row['SEJDTEDEB']);
+        $sejour->setDuree($row['SEJDUREE']);
         return $sejour;
     }
 }

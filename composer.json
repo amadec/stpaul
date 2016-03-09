@@ -10,7 +10,11 @@
     }
   ],
   "require": {
-    "silex/silex": "2.0.x-dev",
-    "doctrine/dbal": "2.6.x-dev"
+    "silex/silex": "1.3.x-dev",
+    "doctrine/dbal": "2.4.x-dev",
+    "phpdocumentor/template-old-ocean": "1.3.2"
+  },
+  "autoload": {
+    "psr-0": {"stpaul":"src/"}
   }
 }

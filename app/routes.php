@@ -1,13 +1,11 @@
 <?php
-//Retourne tous les séjours
-$app->get('/', function() {
+// Home page
+$app->get('/', function () use ($app) {
+    $sejours = $app['dao.sejour']->findAll();
 
-    require '../src/model.php';
-    $sejours = getAllSejours();
-
-    ob_start();                 // start buffering HTML output
+    ob_start();             // start buffering HTML output
     require '../views/view.php';
-    $view = ob_get_clean();      // assign HTML output to $view
+    $view = ob_get_clean(); // assign HTML output to $view
     return $view;
 });
 ?>
