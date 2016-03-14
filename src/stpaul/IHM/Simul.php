@@ -24,6 +24,9 @@ class Simul {
     private $simulTotalApresPlafond;
     private $simulTotalDepartMultiple;
 
+    function __construct()
+    {
+    }
 
     /**
      * @return mixed
@@ -232,6 +235,6 @@ class Simul {
     {
         $this->simulTotalDepartMultiple = $simulTotalDepartMultiple;
     }
-    
+
 
 }
