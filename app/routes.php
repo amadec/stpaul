@@ -8,11 +8,8 @@ $app->get('/', function () use ($app) {
 
 
 $app->match('/simul', function ( Request $request) use ($app) {
-
     $simul = new Simul();
-
-    return $app['twig']->render('simul.html.twig', array(
-        'simul' => $simul));
+    return $app['twig']->render('simul.html.twig', array( 'simul' => $simul));
 })->bind('simul');
 
 ?>
