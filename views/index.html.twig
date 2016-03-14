@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="../web/css/styly.css" rel="stylesheet" />
     <title>SAINT PAUL DU TERRAY</title>
 </head>
 
 <body class="body">
-
 <main class="main">
 
     <header-null class="header-null">
@@ -52,8 +52,9 @@
             <article>
                 <h2>{{ sejour.intitule }}</h2>
                 {{ sejour.Montant }}€ <BR/>
-                A partir du {{ sejour.Dtedeb }}
-                {{ sejour.Duree }} nuits
+                A partir du {{ sejour.getSejDteFormatFR(sejour.Dtedeb) }}
+                {{ sejour.Duree }} nuits <BR />
+                Jusqu'au {{ sejour.getSejDteFormatFR(sejour.getSejDteFin()) }}
             </article>
             {% endfor %}
         </fieldset>
@@ -63,7 +64,6 @@
 <footer class="footer">
     Copyright &copy; 2016 Saint paul du terray
 </footer>
-
 
 </body>
 

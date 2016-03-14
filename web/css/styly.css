@@ -3,6 +3,7 @@
 /* formátování odkazů */
 
 .body {
+     padding-top: 50px;
      padding: 20px 0;
      font: 80%/170% verdana, sans-serif;
      text-align: center ;/* vycentrováno pro Internet Explorer */
@@ -107,6 +108,9 @@ text-decoration: none;
      margin-right: auto;
      text-align: center;
      background-color: silver;
+     border-top: 1px solid #ccc;
+     padding-top: 10px;
+
 }
 
 .footer a  {
