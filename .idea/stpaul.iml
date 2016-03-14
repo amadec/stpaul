@@ -45,14 +45,16 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/composer.phar/" />
-          <root url="phar://$MODULE_DIR$/phpDocumentor.phar/" />
-          <root url="phar://$MODULE_DIR$/phpunit-4.8.23.phar/" />
+          <root url="phar://$MODULE_DIR$/phpunit.phar" />
+          <root url="phar://$MODULE_DIR$/phpDocumentor.phar" />
+          <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/phpunit-4.8.23.phar" />
         </CLASSES>
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/composer.phar/" />
-          <root url="phar://$MODULE_DIR$/phpDocumentor.phar/" />
-          <root url="phar://$MODULE_DIR$/phpunit-4.8.23.phar/" />
+          <root url="phar://$MODULE_DIR$/phpunit.phar" />
+          <root url="phar://$MODULE_DIR$/phpDocumentor.phar" />
+          <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/phpunit-4.8.23.phar" />
         </SOURCES>
       </library>
     </orderEntry>

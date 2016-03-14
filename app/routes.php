@@ -7,9 +7,27 @@ $app->get('/', function () use ($app) {
 });
 
 
+
+// Formulaire de simulation
 $app->match('/simul', function ( Request $request) use ($app) {
+    $simulFormView = null;
+
     $simul = new Simul();
-    return $app['twig']->render('simul.html.twig', array( 'simul' => $simul));
+    $simulForm = $app['form.factory']->create(new SimulType(), $simul);
+    $simulForm->handleRequest($request);
+    if ($simulForm->isSubmitted() && $simulForm->isValid()) {
+        /** TODO les calculs */
+        $sejour = $app['dao.sejour']->getSejour($simul->getSejNo());
+        $simul->getSejMBI($sejour->getSejMontantMBI());
+        $simul->calcul();
+        return $app['twig']->render('simulR.html.twig', array('simul' => $simul, 'sejour' => $sejour));
+    }
+    $simulFormView = $simulForm->createView();
+
+    return $app['twig']->render('simul.html.twig', array(
+        'simul' => $simul,
+        'simulForm' => $simulFormView));
 })->bind('simul');
+
 
 ?>

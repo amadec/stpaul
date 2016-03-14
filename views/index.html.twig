@@ -49,13 +49,13 @@
         <h2>Liste des séjours prévus </h2>
         <fieldset>
             {%  for sejour in sejours %}
-            <article>
+            <sejour>
                 <h2>{{ sejour.intitule }}</h2>
                 {{ sejour.Montant }}€ <BR/>
                 A partir du {{ sejour.getSejDteFormatFR(sejour.Dtedeb) }}
                 {{ sejour.Duree }} nuits <BR />
                 Jusqu'au {{ sejour.getSejDteFormatFR(sejour.getSejDteFin()) }}
-            </article>
+            </sejour>
             {% endfor %}
         </fieldset>
     </right>

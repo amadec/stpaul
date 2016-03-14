@@ -46,7 +46,21 @@
     <noscreen/>
 
     <right class="right">
-
+        <h2>Simulation </h2>
+        <fieldset>
+            <form action="">
+                Nom de famille : <input type="text" name="nomfamille"><br>
+                Nombre d'Enfants : <input type="text" name="nbenfant"><br>
+                Quotient familial : <input type="text" name="QF"><br>
+                Nombre d'Enfants Partants : <input type="text" name="nbenfantpartant"><br>
+                <select>
+                {%  for sejour in sejours %}
+                        <option>{{ sejour.intitule }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" value="Submit">
+            </form>
+        </fieldset>
     </right>
 </main>
 

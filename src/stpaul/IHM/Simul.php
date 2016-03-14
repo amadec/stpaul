@@ -236,5 +236,23 @@ class Simul {
         $this->simulTotalDepartMultiple = $simulTotalDepartMultiple;
     }
 
+    public function CalculReducQF(){
+        $QF=$this->famQF;
+        $MBI=$this->sejMBI;
+        if ($QF<500) {
+            $MBI=$MBI*0.9;
+        }
+    }
+
+    public function CalculNbEnfant(){
+        $nbEnfant=$this->famNbEnfant;
+        $MBI=$this->sejMBI;
+        if ($nbEnfant==2){
+            $MBI=$MBI*0.8;
+        }
+        if ($nbEnfant>=3){
+            $MBI=$MBI*0.6;
+        }
+    }
 
 }
