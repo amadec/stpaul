@@ -256,4 +256,7 @@ class Simul {
         }
     }
 
+    public function calcul(){
+
+    }
 }

@@ -24,7 +24,7 @@ $app->match('/simul', function ( Request $request) use ($app) {
     if ($simulForm->isSubmitted() && $simulForm->isValid()) {
         /** TODO les calculs */
         $sejour = $app['dao.sejour']->getSejour($simul->getSejNo());
-        $simul->getSejMBI($sejour->getSejMontantMBI());
+        $simul->getSejMBI($sejour->getMontant());
         $simul->calcul();
         return $app['twig']->render('simulR.html.twig', array('simul' => $simul, 'sejour' => $sejour));
     }

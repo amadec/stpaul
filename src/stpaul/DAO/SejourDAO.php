@@ -59,4 +59,15 @@ class SejourDAO {
         $sejour->setDuree($row['SEJDUREE']);
         return $sejour;
     }
+
+    //Retourne un  séjour
+    public function getSejour($pNo)
+    {
+        $sql = "select * from sejour where sejno=".$pNo;
+        $result = $this->db->fetchAssoc($sql);
+
+        return $this->buildSejour($result);
+
+    }
+
 }
