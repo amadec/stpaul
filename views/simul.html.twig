@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="../web/css/styly.css" rel="stylesheet" />
+    <link href="../../web/css/styly.css" rel="stylesheet" />
     <title>SAINT PAUL DU TERRAY</title>
 </head>
 
 <body class="body">
+
 <main class="main">
 
     <header-null class="header-null">
@@ -38,8 +38,8 @@
         <br />
         <ul>
             <li>Réduction de 10% si le Quotient Familial est inférieur à 500 Euros</li>
-            <li>Réduction de 20% pour famille de 2 enfants</li>
-            <li>Réduction de 40% pour famille de 3 enfants ou plus</li>
+            <li>Réduction de 20 % pour famille de 2 enfants</li>
+            <li>Réduction de 40 % pour famille de 3 enfants ou plus</li>
         </ul>
     </left>
 
@@ -47,26 +47,65 @@
 
     <right class="right">
         <h2>Simulation </h2>
-        <fieldset>
-            <form action="">
-                Nom de famille : <input type="text" name="nomfamille"><br>
-                Nombre d'Enfants : <input type="text" name="nbenfant"><br>
-                Quotient familial : <input type="text" name="QF"><br>
-                Nombre d'Enfants Partants : <input type="text" name="nbenfantpartant"><br>
-                <select name="sej_intitule">
-                {%  for sejour in sejours %}
-                        <option>{{ sejour.intitule }}</option>
-                {% endfor %}
-                </select>
-                <input type="submit" value="Submit">
-            </form>
-        </fieldset>
+        {% if simulForm %}
+        {{ form_start(simulForm) }}
+        <div class="form-group">
+
+            {{ form_errors(simulForm.famNom) }}
+            {{ form_widget(simulForm.famNom, { 'attr':  {
+                'rows': '1',
+                'class': 'form-control',
+                'placeholder': 'Nom de famille'
+            }}) }}
+            <BR><BR>
+
+            {{ form_errors(simulForm.famNbEnfant) }}
+            {{ form_widget(simulForm.famNbEnfant, { 'attr':  {
+                'rows': '2',
+                'class': 'form-control',
+                'placeholder': 'Nombre d\'Enfants'
+            }}) }}
+            <BR><BR>
+            {{ form_errors(simulForm.famQF) }}
+            {{ form_widget(simulForm.famQF, { 'attr':  {
+                'rows': '2',
+                'class': 'form-control',
+                'placeholder': 'Quotient familial'
+            }}) }}
+            <BR><BR>
+
+            {{ form_errors(simulForm.simulNbEnfPartant) }}
+            {{ form_widget(simulForm.simulNbEnfPartant, { 'attr':  {
+                'rows': '4',
+                'class': 'form-control',
+                'placeholder': 'Nombre d\'enfants partants'
+            }}) }}
+            <BR><BR>
+            {{ form_errors(simulForm.sejNo) }}
+            {{ form_widget(simulForm.sejNo, { 'attr':  {
+                'rows': '5',
+                'class': 'form-control',
+                'placeholder': 'Nom du séjour'
+            }}) }}
+            <BR><BR>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="CALCULER" />
+        </div>
+        {{ form_end(simulForm) }}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        <!-- {% endif %} -->
     </right>
 </main>
 
 <footer class="footer">
     Copyright &copy; 2016 Saint paul du terray
 </footer>
+
 
 </body>
 
