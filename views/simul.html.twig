@@ -53,7 +53,7 @@
                 Nombre d'Enfants : <input type="text" name="nbenfant"><br>
                 Quotient familial : <input type="text" name="QF"><br>
                 Nombre d'Enfants Partants : <input type="text" name="nbenfantpartant"><br>
-                <select>
+                <select name="sej_intitule">
                 {%  for sejour in sejours %}
                         <option>{{ sejour.intitule }}</option>
                 {% endfor %}

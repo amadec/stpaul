@@ -5,6 +5,7 @@
  * Date: 14/03/2016
  * Time: 10:43
  */
+namespace stpaul\IHM;
 
 class Simul {
 
