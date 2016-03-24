@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <link href="../../web/css/styly.css" rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../web/css/styly.css" rel="stylesheet" />
     <title>SAINT PAUL DU TERRAY</title>
 </head>
 
@@ -24,40 +25,29 @@
         </header>
     </header-null>
 
-    <noscreen/>
+        <h2> <b> Simulation de coût d'un voyage pour un enfant:</b> </h2>
 
-    <left class="left">
-        <h2>Madame, Monsieur,</h2>
-        <p>
-            Votre enfant va partir durant l'année scolaire en classe de découverte.
-            <br />Une participation financière par enfant va prochainement vous être demandée.
-            <br /><br />Cette année le conseil municipal a décidé d'instaurer trois types de réductions
-            et un plafonnement à 100 Euros par enfant.
-        </p>
-        <br />
-        <ul>
-            <li>Réduction de 10% si le Quotient Familial est inférieur à 500 Euros</li>
-            <li>Réduction de 20% pour famille de 2 enfants</li>
-            <li>Réduction de 40% pour famille de 3 enfants ou plus</li>
-        </ul>
-    </left>
-
-    <noscreen/>
-
-    <right class="right">
-        <h2>Votre simulation </h2>
-        <fieldset>
             <sejour>
-                <h2><p>
-                        {{ 'Famille '~simul.famNom }} </p></h2>
-                        {{ sejour.Intitule }} </p></h2>
-                        {{ sejour.Montant~'€' }} <br />
+                <p>
+                        {{ 'Famille '~simul.famNom~' avec '~simul.famNbEnfant~' enfant(s) et un quotient familial de '~simul.famQF~'€' }} </p>
+                        {{ simul.simulNbEnfPartant~' enfant(s) partant en '~sejour.Intitule }} </p></h2>
 
-                        {{ 'Réduction'~simul.simulReducQF~'€' }} <br />
-                        {{ 'Total après réduction'~simul.simulTotalApresReduc~'€' }} <br />
+
+                        {{ 'Prix brut du séjour individuel: '~sejour.Montant~'€' }} <br />
+                        {{ 'Réduction sur Quotient Familial 10%: -'~simul.simulReducQF~'€' }}<br />
+                        {{ 'Réduction famille par rapport au nombre d\'enfant: -'~simul.SimulReducFamilleNombreuse~'€' }}<br /> <br />
+
+                        {{ 'Sous Total: '~simul.simulSousTotal~'€' }}<br /><br />
+
+                        {{ 'Réduction départ de plusieurs enfants 10%: '~simul.simulReducDepartMultiple~'€' }} <br />
+                        {{ 'Prix après réductions: '~simul.simulTotalApresReduc~'€' }}<br /><br />
+
+                        <b>{{ 'Net à payer après plafonnement: '~simul.simulTotalApresPlafond~'€' }}</b><br /><br />
+
+                        {{ 'Remarque : vous devrez verser au total '~simul.simulTotalApresPlafond~'*'~simul.simulNbEnfPartant~'='~simul.simulTotalDepartMultiple }}
             </sejour>
-        </fieldset>
-    </right>
+
+
 </main>
 
 <footer class="footer">

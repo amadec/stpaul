@@ -7,24 +7,74 @@
  */
 namespace stpaul\IHM;
 
+/**
+ * Class Simul
+ * @package stpaul\IHM
+ */
 class Simul {
 
+    /**
+     * @var
+     */
     private $famNom;
+    /**
+     * @var
+     */
     private $famNbEnfant;
+    /**
+     * @var
+     */
+    private $RevFiscal;
+    /**
+     * @var
+     */
     private $famQF;
 
+    /**
+     * @var
+     */
     private $sejNo;
+    /**
+     * @var
+     */
     private $sejMBI;
 
+    /**
+     * @var
+     */
     private $simulNbEnfPartant;
+    /**
+     * @var
+     */
     private $simulReducQF;
+    /**
+     * @var
+     */
     private $simulReducFamilleNombreuse;
+    /**
+     * @var
+     */
     private $simulReducDepartMultiple;
+    /**
+     * @var
+     */
     private $simulSousTotal;
+    /**
+     * @var
+     */
     private $simulTotalApresReduc;
+    /**
+     * @var
+     */
     private $simulTotalApresPlafond;
+    /**
+     * @var
+     */
     private $simulTotalDepartMultiple;
 
+    /**
+     *
+     */
     function __construct()
     {
     }
@@ -64,6 +114,22 @@ class Simul {
     /**
      * @return mixed
      */
+    public function getRevFiscal()
+    {
+        return $this->RevFiscal;
+    }
+
+    /**
+     * @param mixed $RevFiscal
+     */
+    public function setRevFiscal($RevFiscal)
+    {
+        $this->RevFiscal = $RevFiscal;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFamQF()
     {
         return $this->famQF;
@@ -72,9 +138,21 @@ class Simul {
     /**
      * @param mixed $famQF
      */
-    public function setFamQF($famQF)
+    public function setFamQF()
     {
-        $this->famQF = $famQF;
+        $rev=$this->RevFiscal;
+        $nbEnfant=$this->famNbEnfant;
+        if ($nbEnfant==1) {
+            $this->famQF = (int)($rev/(12*2.5));
+        } elseif ($nbEnfant==2) {
+            $this->famQF = (int)($rev/(12*3));
+        } elseif ($nbEnfant==3) {
+            $this->famQF = (int)($rev/(12*4));
+        } elseif ($nbEnfant==4) {
+            $this->famQF = (int)($rev/(12*5));
+        } elseif ($nbEnfant==5) {
+            $this->famQF = (int)($rev/(12*6));
+        }
     }
 
     /**
@@ -136,9 +214,15 @@ class Simul {
     /**
      * @param mixed $simulReducQF
      */
-    public function setSimulReducQF($simulReducQF)
+    public function setSimulReducQF()
     {
-        $this->simulReducQF = $simulReducQF;
+        $QF=$this->famQF;
+        $Prix=$this->sejMBI;
+        if ($QF<=500) {
+            $this->simulReducQF = ($Prix*0.1);
+        } else {
+            $this->simulReducQF = 0;
+        }
     }
 
     /**
@@ -152,9 +236,17 @@ class Simul {
     /**
      * @param mixed $simulReducFamilleNombreuse
      */
-    public function setSimulReducFamilleNombreuse($simulReducFamilleNombreuse)
+    public function setSimulReducFamilleNombreuse()
     {
-        $this->simulReducFamilleNombreuse = $simulReducFamilleNombreuse;
+        $Prix=$this->sejMBI;
+        $nbEnfant=$this->famNbEnfant;
+        if ($nbEnfant==2){
+            $this->simulReducFamilleNombreuse =($Prix*0.2);
+        } elseif ($nbEnfant>=3){
+            $this->simulReducFamilleNombreuse =($Prix*0.4);
+        } else {
+            $this->simulReducFamilleNombreuse =0;
+        }
     }
 
     /**
@@ -168,9 +260,15 @@ class Simul {
     /**
      * @param mixed $simulReducDepartMultiple
      */
-    public function setSimulReducDepartMultiple($simulReducDepartMultiple)
+    public function setSimulReducDepartMultiple()
     {
-        $this->simulReducDepartMultiple = $simulReducDepartMultiple;
+        $Prix=$this->sejMBI;
+        $nbEnfantPartant=$this->simulNbEnfPartant;
+        if ($nbEnfantPartant>1) {
+            $this->simulReducDepartMultiple = ($Prix*0.1);
+        } else {
+            $this->simulReducDepartMultiple =0;
+        }
     }
 
     /**
@@ -184,9 +282,13 @@ class Simul {
     /**
      * @param mixed $simulSousTotal
      */
-    public function setSimulSousTotal($simulSousTotal)
+    public function setSimulSousTotal()
     {
-        $this->simulSousTotal = $simulSousTotal;
+        $Prix=$this->sejMBI;
+        $ReducQF=$this->getSimulReducQF();
+        $ReducNbEnfant=$this->getSimulReducFamilleNombreuse();
+        $this->simulSousTotal = ($Prix-$ReducQF-$ReducNbEnfant);
+        $this->sejMBI=$this->simulSousTotal;
     }
 
     /**
@@ -200,9 +302,12 @@ class Simul {
     /**
      * @param mixed $simulTotalApresReduc
      */
-    public function setSimulTotalApresReduc($simulTotalApresReduc)
+    public function setSimulTotalApresReduc()
     {
-        $this->simulTotalApresReduc = $simulTotalApresReduc;
+        $Prix=$this->sejMBI;
+        $ReducMultiDep=$this->getSimulReducDepartMultiple();
+        $this->simulTotalApresReduc = ($Prix-$ReducMultiDep);
+        $this->sejMBI=$this->simulTotalApresReduc;
     }
 
     /**
@@ -216,9 +321,15 @@ class Simul {
     /**
      * @param mixed $simulTotalApresPlafond
      */
-    public function setSimulTotalApresPlafond($simulTotalApresPlafond)
+    public function setSimulTotalApresPlafond()
     {
-        $this->simulTotalApresPlafond = $simulTotalApresPlafond;
+        $Prix=$this->sejMBI;
+        if ($Prix>100) {
+            $this->simulTotalApresPlafond = 100;
+        } else {
+            $this->simulTotalApresPlafond = $Prix;
+        }
+        $this->sejMBI=$this->simulTotalApresPlafond;
     }
 
     /**
@@ -232,31 +343,24 @@ class Simul {
     /**
      * @param mixed $simulTotalDepartMultiple
      */
-    public function setSimulTotalDepartMultiple($simulTotalDepartMultiple)
+    public function setSimulTotalDepartMultiple()
     {
-        $this->simulTotalDepartMultiple = $simulTotalDepartMultiple;
+        $Prix=$this->sejMBI;
+        $nbEnfantPartant=$this->simulNbEnfPartant;
+        $this->simulTotalDepartMultiple = $Prix*$nbEnfantPartant;
     }
 
-    public function CalculReducQF(){
-        $QF=$this->famQF;
-        $MBI=$this->sejMBI;
-        if ($QF<500) {
-            $MBI=$MBI*0.9;
-        }
-    }
-
-    public function CalculNbEnfant(){
-        $nbEnfant=$this->famNbEnfant;
-        $MBI=$this->sejMBI;
-        if ($nbEnfant==2){
-            $MBI=$MBI*0.8;
-        }
-        if ($nbEnfant>=3){
-            $MBI=$MBI*0.6;
-        }
-    }
-
+    /**
+     *
+     */
     public function calcul(){
-
+        $this->setSimulReducQF();
+        $this->setSimulReducFamilleNombreuse();
+        $this->setSimulSousTotal();
+        $this->setSimulReducDepartMultiple();
+        $this->setSimulTotalApresReduc();
+        $this->setSimulTotalApresPlafond();
+        $this->setSimulTotalDepartMultiple();
     }
+
 }

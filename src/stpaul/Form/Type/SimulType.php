@@ -10,7 +10,6 @@ namespace stpaul\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class SimulType extends AbstractType
 {
@@ -18,7 +17,7 @@ class SimulType extends AbstractType
     {
         $builder->add('famNom', 'text');
         $builder->add('famNbEnfant', 'text');
-        $builder->add('famQF', 'text');
+        $builder->add('Rev_Fiscal', 'text');
 
         $builder->add('sejNo', 'choice', array(
             'choices' => array('1' => 'Classe de découverte', '2' => 'Classe de mer', '3' => 'Ski à Tignes')
